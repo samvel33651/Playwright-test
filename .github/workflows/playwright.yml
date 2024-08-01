@@ -6,13 +6,14 @@ on:
     branches: [main, master]
 jobs:
   test:
+    environment: dev
     timeout-minutes: 60
     runs-on: ubuntu-latest
     env:
-      API_URL: ${{ vars.dev.API_URL }}
-      BUILDING_ID: ${{ vars.dev.BUILDING_ID }}
-      CAMERA_ID: ${{ vars.dev.CAMERA_ID }}
-      GETWAY_ID: ${{ vars.dev.GETWAY_ID }}
+      API_URL: ${{ vars.API_URL }}
+      BUILDING_ID: ${{ vars.BUILDING_ID }}
+      CAMERA_ID: ${{ vars.CAMERA_ID }}
+      GETWAY_ID: ${{ vars.GETWAY_ID }}
       CLIENT_JWT_SECRET: ${{ secrets.CLIENT_JWT_SECRET }}
       GETWAY_JWT_SECRET: ${{ secrets.GETWAY_JWT_SECRET }}
     steps:
