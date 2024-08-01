@@ -1,9 +1,8 @@
-name: Playwright Tests
+name: Storage Api Tests for DEV environment
 on:
-  push:
-    branches: [main, master]
-  pull_request:
-    branches: [main, master]
+  schedule:
+    - cron: "0 1 * * 1-5"
+  workflow_dispatch: {}
 jobs:
   test:
     environment: dev
