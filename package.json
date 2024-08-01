@@ -15,7 +15,8 @@
     "@playwright/test": "^1.45.0",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20.14.9",
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "playwright-slack-report": "^1.1.81"
   },
   "dependencies": {
     "date-fns": "^3.6.0",
