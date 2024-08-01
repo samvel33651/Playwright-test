@@ -9,12 +9,12 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     env:
-      API_URL: ${{ secrets.API_URL }}
-      BUILDING_ID: ${{ secrets.BUILDING_ID }}
-      CAMERA_ID: ${{ secrets.CAMERA_ID }}
-      GETWAY_ID: ${{ secrets.GETWAY_ID }}
-      CLIENT_JWT_SECRET: ${{ secrets.CLIENT_JWT_SECRET }}
-      GETWAY_JWT_SECRET: ${{ secrets.GETWAY_JWT_SECRET }}
+      API_URL: ${{ secrets.dev.API_URL }}
+      BUILDING_ID: ${{ secrets.dev.BUILDING_ID }}
+      CAMERA_ID: ${{ secrets.dev.CAMERA_ID }}
+      GETWAY_ID: ${{ secrets.dev.GETWAY_ID }}
+      CLIENT_JWT_SECRET: ${{ secrets.dev.CLIENT_JWT_SECRET }}
+      GETWAY_JWT_SECRET: ${{ secrets.dev.GETWAY_JWT_SECRET }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -22,12 +22,12 @@ jobs:
           node-version: lts/*
       - name: Create .env file
         run: |
-          echo "API_URL=${{ secrets.dev.API_URL }}" >> .env
-          echo "BUILDING_ID=${{ secrets.dev.BUILDING_ID }}" >> .env
-          echo "CAMERA_ID=${{ secrets.dev.CAMERA_ID }}" >> .env
-          echo "GETWAY_ID=${{ secrets.dev.GETWAY_ID }}" >> .env
-          echo "CLIENT_JWT_SECRET=${{ secrets.dev.CLIENT_JWT_SECRET }}" >> .env
-          echo "GETWAY_JWT_SECRET=${{ secrets.dev.GETWAY_JWT_SECRET }}" >> .env
+          echo "API_URL=${{ env.API_URL }}" >> .env
+          echo "BUILDING_ID=${{ env.BUILDING_ID }}" >> .env
+          echo "CAMERA_ID=${{ env.CAMERA_ID }}" >> .env
+          echo "GETWAY_ID=${{ env.GETWAY_ID }}" >> .env
+          echo "CLIENT_JWT_SECRET=${{ env.CLIENT_JWT_SECRET }}" >> .env
+          echo "GETWAY_JWT_SECRET=${{ env.GETWAY_JWT_SECRET }}" >> .env
         shell: bash
       - name: Install dependencies
         run: npm ci
