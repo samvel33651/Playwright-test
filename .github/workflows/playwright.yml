@@ -9,12 +9,12 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     env:
-      API_URL: ${{ secrets.dev.API_URL }}
-      BUILDING_ID: ${{ secrets.dev.BUILDING_ID }}
-      CAMERA_ID: ${{ secrets.dev.CAMERA_ID }}
-      GETWAY_ID: ${{ secrets.dev.GETWAY_ID }}
-      CLIENT_JWT_SECRET: ${{ secrets.dev.CLIENT_JWT_SECRET }}
-      GETWAY_JWT_SECRET: ${{ secrets.dev.GETWAY_JWT_SECRET }}
+      API_URL: ${{ vars.dev.API_URL }}
+      BUILDING_ID: ${{ vars.dev.BUILDING_ID }}
+      CAMERA_ID: ${{ vars.dev.CAMERA_ID }}
+      GETWAY_ID: ${{ vars.dev.GETWAY_ID }}
+      CLIENT_JWT_SECRET: ${{ secrets.CLIENT_JWT_SECRET }}
+      GETWAY_JWT_SECRET: ${{ secrets.GETWAY_JWT_SECRET }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
