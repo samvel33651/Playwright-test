@@ -1,27 +1,43 @@
 name: Playwright Tests
 on:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
   pull_request:
-    branches: [ main, master ]
+    branches: [main, master]
 jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+      API_URL: ${{ secrets.API_URL }}
+      BUILDING_ID: ${{ secrets.BUILDING_ID }}
+      CAMERA_ID: ${{ secrets.CAMERA_ID }}
+      GETWAY_ID: ${{ secrets.GETWAY_ID }}
+      CLIENT_JWT_SECRET: ${{ secrets.CLIENT_JWT_SECRET }}
+      GETWAY_JWT_SECRET: ${{ secrets.GETWAY_JWT_SECRET }}
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version: lts/*
-    - name: Install dependencies
-      run: npm ci
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
-    - name: Run Playwright tests
-      run: npx playwright test
-    - uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: Create .env file
+        run: |
+          echo "API_URL=${{ secrets.dev.API_URL }}" >> .env
+          echo "BUILDING_ID=${{ secrets.dev.BUILDING_ID }}" >> .env
+          echo "CAMERA_ID=${{ secrets.dev.CAMERA_ID }}" >> .env
+          echo "GETWAY_ID=${{ secrets.dev.GETWAY_ID }}" >> .env
+          echo "CLIENT_JWT_SECRET=${{ secrets.dev.CLIENT_JWT_SECRET }}" >> .env
+          echo "GETWAY_JWT_SECRET=${{ secrets.dev.GETWAY_JWT_SECRET }}" >> .env
+        shell: bash
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: Run Playwright tests
+        run: npx playwright test
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30

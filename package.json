@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "npx playwright test",
     "test:dev": "cross-env ENV=dev npx playwright test",
     "test:staging": "cross-env ENV=stg npx playwright test"
   },
